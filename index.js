@@ -76,6 +76,7 @@ const viewAllRoles = () => {
         })
 };
 
+// View all employees
 const viewAllEmployees = () => {
     connection.query("",
         function(err, res) {
