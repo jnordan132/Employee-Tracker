@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 
+// Connection to SQL database
 const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -15,6 +16,7 @@ connection.connect(function(err) {
     startPrompt();
 });
 
+// Function to start question prompt + switch statements
 const startPrompt = () => {
     return inquirer.prompt([{
         name: 'database',
@@ -52,4 +54,33 @@ const startPrompt = () => {
                 break;
         }
     })
+};
+
+// View all departments
+const viewAllDepartments = () => {
+    connection.query("",
+        function(err, res) {
+            if (err) throw err
+            console.table(res)
+            startPrompt()
+        })
+};
+
+// View all roles
+const viewAllRoles = () => {
+    connection.query("",
+        function(err, res) {
+            if (err) throw err
+            console.table(res)
+            startPrompt()
+        })
+};
+
+const viewAllEmployees = () => {
+    connection.query("",
+        function(err, res) {
+            if (err) throw err
+            console.table(res)
+            startPrompt()
+        })
 };
