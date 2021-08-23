@@ -58,7 +58,7 @@ const startPrompt = () => {
 
 // viewAllDepartments function
 const viewAllDepartments = () => {
-    connection.query("",
+    connection.query("SELECT * FROM department",
         function(err, res) {
             if (err) throw err
             console.table(res)
@@ -68,7 +68,7 @@ const viewAllDepartments = () => {
 
 // viewAllRoles function
 const viewAllRoles = () => {
-    connection.query("",
+    connection.query("SELECT * FROM role",
         function(err, res) {
             if (err) throw err
             console.table(res)
@@ -78,7 +78,7 @@ const viewAllRoles = () => {
 
 // viewAllEmployees function
 const viewAllEmployees = () => {
-    connection.query("",
+    connection.query("SELECT * FROM employee",
         function(err, res) {
             if (err) throw err
             console.table(res)
