@@ -9,12 +9,12 @@ VALUES (1, "Sales"),
 INSERT INTO role (department_id, department, title, salary)
 VALUES (1, "Sales", "Sales Lead", 100000),
        (1, "Sales", "Salesperson", 80000),
-       (1, "Engineering", "Lead Engineer", 150000),
-       (1, "Engineering", "Software Engineer", 120000),
-       (1, "Finance", "Accountant Manager", 160000),
-       (1, "Finance", "Accountant", 125000),
-       (1, "Legal", "Legal Team Lead", 250000),
-       (1, "Legal", "Lawyer", 190000);
+       (2, "Engineering", "Lead Engineer", 150000),
+       (2, "Engineering", "Software Engineer", 120000),
+       (3, "Finance", "Accountant Manager", 160000),
+       (3, "Finance", "Accountant", 125000),
+       (4, "Legal", "Legal Team Lead", 250000),
+       (4, "Legal", "Lawyer", 190000);
 
 -- Employee seeds
 INSERT INTO employee (id, first_name, last_name, title, department, salary, manager)
