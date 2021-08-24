@@ -1,18 +1,23 @@
 const inquirer = require('inquirer');
+const express = require('express');
 const mysql = require('mysql2');
 
+const PORT = process.env.PORT || 3001;
+const app = express();
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 // Connection to SQL database
-const connection = mysql.createConnection({
+const db = mysql.createConnection({
     host: "localhost",
-    port: 3306,
     user: "root",
     password: "Jacob113322",
     database: "employeeTracker_db"
 });
 
-connection.connect(function(err) {
+db.connect(function(err) {
     if (err) throw err
-    console.log("Connected as Id" + connection.threadId)
+    console.log("Connected as Id" + db.threadId)
     startPrompt();
 });
 
@@ -58,17 +63,14 @@ const startPrompt = () => {
 
 // viewAllDepartments function
 const viewAllDepartments = () => {
-    connection.query("SELECT * FROM department",
-        function(err, res) {
-            if (err) throw err
-            console.table(res)
-            startPrompt()
-        })
+    db.query("SELECT * FROM department", function(err, res) {
+        console.log(res)
+    })
 };
 
 // viewAllRoles function
 const viewAllRoles = () => {
-    connection.query("SELECT * FROM role",
+    db.query("SELECT * FROM role",
         function(err, res) {
             if (err) throw err
             console.table(res)
@@ -78,7 +80,7 @@ const viewAllRoles = () => {
 
 // viewAllEmployees function
 const viewAllEmployees = () => {
-    connection.query("SELECT * FROM employee",
+    db.query("SELECT * FROM employee",
         function(err, res) {
             if (err) throw err
             console.table(res)
@@ -109,7 +111,7 @@ const addDepartment = () => {
 // selectRole function used in add/update employee prompt 
 let roleArr = [];
 const selectRole = () => {
-    connection.query("", function(err, res) {
+    db.query("", function(err, res) {
         if (err) throw err
         for (var i = 0; i < res.length; i++) {
             roleArr.push(res[i].title);
@@ -121,7 +123,7 @@ const selectRole = () => {
 // selectManager function for addEmployee prompt
 let managersArr = [];
 const selectManager = () => {
-    connection.query("", function(err, res) {
+    db.query("", function(err, res) {
         if (err) throw err
         for (var i = 0; i < res.length; i++) {
             managersArr.push(res[i].first_name);
@@ -172,7 +174,7 @@ const addEmployee = () => {
 
 // updateEmployee function
 const updateEmployee = () => {
-    connection.query("", function(err, res) {
+    db.query("", function(err, res) {
         if (err) throw err
         console.log(res)
         inquirer.prompt([{
@@ -195,7 +197,7 @@ const updateEmployee = () => {
             },
         ]).then(function(val) {
             const roleId = selectRole().indexOf(val.role) + 1;
-            connection.query("", {
+            db.query("", {
                     last_name: val.lastName
 
                 }, {
@@ -213,7 +215,7 @@ const updateEmployee = () => {
 
 // addRole function
 const addRole = () => {
-    connection.query("", function(err, res) {
+    db.query("", function(err, res) {
         inquirer.prompt([{
                 name: "Title",
                 type: "input",
@@ -225,7 +227,7 @@ const addRole = () => {
                 message: "What is the Salary?"
             }
         ]).then(function(res) {
-            connection.query(
+            db.query(
                 "", {
                     title: res.Title,
                     salary: res.Salary,
@@ -239,3 +241,7 @@ const addRole = () => {
         });
     });
 };
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
