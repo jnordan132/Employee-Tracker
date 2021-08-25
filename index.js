@@ -1,6 +1,7 @@
 // Modules needed
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
+// const cTable = require('console.table');
 
 // Connection to SQL database
 const db = mysql.createConnection({
@@ -12,7 +13,7 @@ const db = mysql.createConnection({
 
 db.connect(function(err) {
     if (err) throw err
-    console.log("Connected as Id" + db.threadId)
+    console.log("MySQL Connected")
     startPrompt();
 });
 
@@ -58,14 +59,17 @@ const startPrompt = () => {
 
 // viewAllDepartments function
 const viewAllDepartments = () => {
-    db.query("SELECT * FROM department", function(err, res) {
-        console.log(res)
+    let query = "SELECT * FROM departments"
+    db.query(query, function(err, query) {
+        if (err) throw err
+        console.table(query)
+        startPrompt()
     })
 };
 
 // viewAllRoles function
 const viewAllRoles = () => {
-    db.query("SELECT * FROM role",
+    db.query("SELECT * FROM roles",
         function(err, res) {
             if (err) throw err
             console.table(res)
@@ -75,7 +79,7 @@ const viewAllRoles = () => {
 
 // viewAllEmployees function
 const viewAllEmployees = () => {
-    db.query("SELECT * FROM employee",
+    db.query("SELECT * FROM employees",
         function(err, res) {
             if (err) throw err
             console.table(res)

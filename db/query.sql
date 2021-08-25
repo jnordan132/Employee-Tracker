@@ -1,3 +1,6 @@
 USE employeeTracker_db;
 
-SELECT * FROM
+SELECT * FROM departments;
+SELECT * FROM roles;
+SELECT * FROM employees;
+
