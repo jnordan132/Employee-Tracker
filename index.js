@@ -1,7 +1,8 @@
 // Modules needed
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-var figlet = require('figlet');
+const figlet = require('figlet');
+const cTable = require('console.table');
 
 // Connection to SQL database
 const db = mysql.createConnection({
@@ -18,7 +19,7 @@ db.connect(function(err) {
 });
 
 // Figlet to show "EMPLOYEE TRACKER" in cool line format
-figlet("EMPLOYEE TRACKER", function(err, res) {
+figlet("EMPLOYEE  TRACKER", function(err, res) {
     if (err) {
         console.log('Something went wrong...');
         console.dir(err);
@@ -69,7 +70,7 @@ const startPrompt = () => {
 
 // viewAllDepartments function
 const viewAllDepartments = () => {
-    figlet("ALL DEPARTMENTS", function(err, res) {
+    figlet("ALL  DEPARTMENTS", function(err, res) {
         if (err) {
             console.log('Something went wrong...');
             console.dir(err);
@@ -88,7 +89,7 @@ const viewAllDepartments = () => {
 
 // viewAllRoles function
 const viewAllRoles = () => {
-    figlet("ALL ROLES", function(err, res) {
+    figlet("ALL  ROLES", function(err, res) {
         if (err) {
             console.log('Something went wrong...');
             console.dir(err);
@@ -96,7 +97,7 @@ const viewAllRoles = () => {
         }
         console.log(res)
     })
-    const query = ``;
+    const query = `SELECT roles.id, roles.title, roles.salary FROM roles`;
     db.query(query,
         function(err, res) {
             if (err) throw err
@@ -107,7 +108,7 @@ const viewAllRoles = () => {
 
 // viewAllEmployees function
 const viewAllEmployees = () => {
-    figlet("ALL EMPLOYEES", function(err, res) {
+    figlet("ALL  EMPLOYEES", function(err, res) {
         if (err) {
             console.log('Something went wrong...');
             console.dir(err);
@@ -115,7 +116,7 @@ const viewAllEmployees = () => {
         }
         console.log(res)
     })
-    const query = ``;
+    const query = `SELECT employees.id, employees.first_name, employees.last_name, departments.name, roles.title, roles.salary, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employees INNER JOIN roles on roles.id = employees.role_id INNER JOIN departments on departments.id = roles.department_id left join employees e on employees.manager_id = e.id;`;
     db.query(query,
         function(err, res) {
             if (err) throw err
@@ -131,8 +132,8 @@ const addDepartment = () => {
         type: "input",
         message: "What department would you like to add?"
     }]).then(function(res) {
-        const query = connection.query(
-            "", {
+        const query = db.query(
+            "INSERT ", {
                 name: res.name
             },
             function(err) {
@@ -147,7 +148,7 @@ const addDepartment = () => {
 // selectRole function used in add/update employee prompt 
 let roleArr = [];
 const selectRole = () => {
-    db.query("", function(err, res) {
+    db.query("SELECT * FROM roles", function(err, res) {
         if (err) throw err
         for (var i = 0; i < res.length; i++) {
             roleArr.push(res[i].title);
@@ -195,7 +196,7 @@ const addEmployee = () => {
     ]).then(function(val) {
         const roleId = selectRole().indexOf(val.role) + 1;
         const managerId = selectManager().indexOf(val.choice) + 1;
-        connection.query("", {
+        db.query("", {
             first_name: val.firstName,
             last_name: val.lastName,
             manager_id: managerId,
