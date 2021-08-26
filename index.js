@@ -1,7 +1,7 @@
 // Modules needed
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-// const cTable = require('console.table');
+var figlet = require('figlet');
 
 // Connection to SQL database
 const db = mysql.createConnection({
@@ -17,16 +17,27 @@ db.connect(function(err) {
     startPrompt();
 });
 
+// Figlet to show "EMPLOYEE TRACKER" in cool line format
+figlet("EMPLOYEE TRACKER", function(err, res) {
+    if (err) {
+        console.log('Something went wrong...');
+        console.dir(err);
+        return;
+    }
+    console.log(res)
+});
+
 // startPrompt function that starts question prompt + switch statements
 const startPrompt = () => {
     return inquirer.prompt([{
-        name: 'database',
+        name: 'action',
         type: 'list',
         message: 'What would you like to do?',
         choices: ["View All Departments?", "View All Roles?", "View All Employees?", "Add Department?", "Add Role?", "Add Employee?", "Update Employee Role?"]
     }]).then(function(val) {
-        switch (val.choice) {
+        switch (val.action) {
             case "View All Departments?":
+                console.log(val.action);
                 viewAllDepartments();
                 break;
 
@@ -52,24 +63,25 @@ const startPrompt = () => {
 
             case "Update Employee Role?":
                 updateEmployee();
-                break;
         }
-    })
-};
+    });
+}
 
 // viewAllDepartments function
 const viewAllDepartments = () => {
-    let query = "SELECT * FROM departments"
-    db.query(query, function(err, query) {
-        if (err) throw err
-        console.table(query)
-        startPrompt()
-    })
+    const query = ``;
+    db.query(query,
+        function(err, res) {
+            if (err) throw err
+            console.table(res)
+            startPrompt()
+        })
 };
 
 // viewAllRoles function
 const viewAllRoles = () => {
-    db.query("SELECT * FROM roles",
+    const query = ``;
+    db.query(query,
         function(err, res) {
             if (err) throw err
             console.table(res)
@@ -79,7 +91,8 @@ const viewAllRoles = () => {
 
 // viewAllEmployees function
 const viewAllEmployees = () => {
-    db.query("SELECT * FROM employees",
+    const query = ``;
+    db.query(query,
         function(err, res) {
             if (err) throw err
             console.table(res)
