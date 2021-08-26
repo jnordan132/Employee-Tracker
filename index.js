@@ -96,7 +96,7 @@ const viewAllRoles = () => {
         }
         console.log(res)
     })
-    const query = `SELECT * FROM roles`;
+    const query = ``;
     db.query(query,
         function(err, res) {
             if (err) throw err
@@ -115,7 +115,7 @@ const viewAllEmployees = () => {
         }
         console.log(res)
     })
-    const query = `SELECT * FROM employees`;
+    const query = ``;
     db.query(query,
         function(err, res) {
             if (err) throw err
