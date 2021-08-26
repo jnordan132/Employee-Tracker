@@ -69,7 +69,15 @@ const startPrompt = () => {
 
 // viewAllDepartments function
 const viewAllDepartments = () => {
-    const query = ``;
+    figlet("ALL DEPARTMENTS", function(err, res) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    })
+    const query = `SELECT * FROM departments`;
     db.query(query,
         function(err, res) {
             if (err) throw err
@@ -80,7 +88,15 @@ const viewAllDepartments = () => {
 
 // viewAllRoles function
 const viewAllRoles = () => {
-    const query = ``;
+    figlet("ALL ROLES", function(err, res) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    })
+    const query = `SELECT * FROM roles`;
     db.query(query,
         function(err, res) {
             if (err) throw err
@@ -91,7 +107,15 @@ const viewAllRoles = () => {
 
 // viewAllEmployees function
 const viewAllEmployees = () => {
-    const query = ``;
+    figlet("ALL EMPLOYEES", function(err, res) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    })
+    const query = `SELECT * FROM employees`;
     db.query(query,
         function(err, res) {
             if (err) throw err
