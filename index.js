@@ -128,13 +128,14 @@ const viewAllEmployees = () => {
 // addDepartment function
 const addDepartment = () => {
     inquirer.prompt([{
-        name: "addDepartment",
+        name: "Name",
         type: "input",
         message: "What department would you like to add?"
     }]).then(function(res) {
-        const query = db.query(
-            "INSERT ", {
-                name: res.name
+        const query = "INSERT INTO departments SET ?";
+        db.query(
+            query, {
+                name: res.Name
             },
             function(err) {
                 if (err) throw err
@@ -148,7 +149,8 @@ const addDepartment = () => {
 // selectRole function used in add/update employee prompt 
 let roleArr = [];
 const selectRole = () => {
-    db.query("SELECT * FROM roles", function(err, res) {
+    const query = "SELECT * FROM roles";
+    db.query(query, function(err, res) {
         if (err) throw err
         for (var i = 0; i < res.length; i++) {
             roleArr.push(res[i].title);
