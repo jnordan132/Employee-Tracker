@@ -268,7 +268,7 @@ const updateEmployee = () => {
             },
         ]).then(function(val) {
             const roleId = selectRole().indexOf(val.role) + 1;
-            db.query("", {
+            db.query("INSERT INTO roles SET ?", {
                     last_name: val.lastName
 
                 }, {
