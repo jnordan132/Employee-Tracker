@@ -3,12 +3,13 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const figlet = require('figlet');
 const cTable = require('console.table');
+require('dotenv').config();
 
 // Connection to SQL database
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Jacob113322",
+    password: process.env.DB_PASSWORD,
     database: "employeeTracker_db"
 });
 
