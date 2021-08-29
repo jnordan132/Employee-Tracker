@@ -244,10 +244,9 @@ const addEmployee = () => {
 
 // updateEmployee function
 const updateEmployee = () => {
-    const query = `SELECT employees.last_name, employees.role_id FROM employees`;
+    const query = `SELECT employees.last_name, roles.title FROM employees JOIN roles ON employees.role_id = roles.id`;
     db.query(query, function(err, res) {
         if (err) throw err
-        console.log(res)
         inquirer.prompt([{
                 name: "lastName",
                 type: "rawlist",
@@ -268,7 +267,7 @@ const updateEmployee = () => {
             },
         ]).then(function(val) {
             const roleId = selectRole().indexOf(val.role) + 1;
-            db.query("INSERT INTO roles SET ?", {
+            db.query("UPDATE roles SET ?", {
                     last_name: val.lastName
 
                 }, {
