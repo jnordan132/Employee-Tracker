@@ -34,35 +34,35 @@ const startPrompt = () => {
         name: 'action',
         type: 'list',
         message: 'What would you like to do?',
-        choices: ["View All Departments?", "View All Roles?", "View All Employees?", "Add Department?", "Add Role?", "Add Employee?", "Update Employee Role?"]
+        choices: ["View All Departments", "View All Roles", "View All Employees", "Add Department", "Add Role", "Add Employee", "Update Employee Role"]
     }]).then(function(val) {
         switch (val.action) {
-            case "View All Departments?":
+            case "View All Departments":
                 console.log(val.action);
                 viewAllDepartments();
                 break;
 
-            case "View All Roles?":
+            case "View All Roles":
                 viewAllRoles();
                 break;
 
-            case "View All Employees?":
+            case "View All Employees":
                 viewAllEmployees();
                 break;
 
-            case "Add Department?":
+            case "Add Department":
                 addDepartment();
                 break;
 
-            case "Add Role?":
+            case "Add Role":
                 addRole();
                 break;
 
-            case "Add Employee?":
+            case "Add Employee":
                 addEmployee();
                 break;
 
-            case "Update Employee Role?":
+            case "Update Employee Role":
                 updateEmployee();
         }
     });
@@ -127,6 +127,14 @@ const viewAllEmployees = () => {
 
 // addDepartment function
 const addDepartment = () => {
+    figlet("ADD  DEPARTMENT", function(err, res) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    })
     inquirer.prompt([{
         name: "Name",
         type: "input",
@@ -174,6 +182,14 @@ const selectManager = () => {
 
 // addRole function
 const addRole = () => {
+    figlet("ADD  ROLE", function(err, res) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    })
     const query = `SELECT roles.title, roles.salary FROM roles`;
     db.query(query, function(err, res) {
         inquirer.prompt([{
@@ -204,6 +220,14 @@ const addRole = () => {
 
 // addEmployee function
 const addEmployee = () => {
+    figlet("ADD  EMPLOYEE", function(err, res) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    })
     inquirer.prompt([{
             name: "first_name",
             type: "input",
@@ -244,6 +268,14 @@ const addEmployee = () => {
 
 // updateEmployee function
 const updateEmployee = () => {
+    figlet("UPDATE  EMPLOYEE", function(err, res) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    })
     const query = `SELECT employees.last_name, roles.title FROM employees JOIN roles ON employees.role_id = roles.id`;
     db.query(query, function(err, res) {
         if (err) throw err
@@ -266,14 +298,14 @@ const updateEmployee = () => {
                 choices: selectRole()
             },
         ]).then(function(val) {
-            const roleId = selectRole().indexOf(val.role) + 1;
-            db.query("UPDATE employees SET ?", {
-                    last_name: val.lastName
+            let roleId = selectRole().indexOf(val.role) + 1;
+            db.query("UPDATE employees SET ? WHERE ?", [{
+                    last_name: val.lastName,
 
                 }, {
                     role_id: roleId
 
-                },
+                }],
                 function(err) {
                     if (err) throw err
                     console.table(val)
