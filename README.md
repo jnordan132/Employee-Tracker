@@ -1,6 +1,6 @@
 # Employee-Tracker
 [GitHub Repo](https://github.com/jnordan132/Employee-Tracker)\
-[Video Showing Use]()
+[Video Showing Use](https://drive.google.com/file/d/1a5aqqVuvGTxlTtxtiTKckoNWOio4ZUg-/view)
 # Description
 This terminal application is designed to give the ability to view and manage your employees by department, as well as role. You can also view tables per department/role to identify information such as job role, department of work, salary, and ID. This application has an SQL databse where all of this information gets stored and displayed from.
 # Table of Contents 
@@ -9,6 +9,7 @@ This terminal application is designed to give the ability to view and manage you
 * [License](#license)
 * [Contributing](#contributing)
 * [Questions](#questions)
+* [Screenshots](#screenshots)
 # Installation
 The following necessary dependencies must be installed to run the application properly: Inquirer, Express, and MySQL2
 # Usage
@@ -35,3 +36,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 ​Contributors: Jacob Nordan
 # Questions
 If you have any questions about the repository contact Jacob Nordan directly at : jacob.nordan113322@gmail.com.
+# Screenshots
+![screenshot1](https://user-images.githubusercontent.com/81433664/131264141-abe6b72e-1d18-4c1a-bd3b-a0dce79e8ef5.jpg)
+![screenshot2](https://user-images.githubusercontent.com/81433664/131264144-a1b3a626-56cc-4b4a-8191-2ebfc61e67d4.jpg)
