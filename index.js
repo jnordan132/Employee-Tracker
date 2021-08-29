@@ -207,17 +207,17 @@ const addEmployee = () => {
     inquirer.prompt([{
             name: "first_name",
             type: "input",
-            message: "Enter employee first name "
+            message: "Enter employee first name"
         },
         {
             name: "last_name",
             type: "input",
-            message: "Enter employee last name "
+            message: "Enter employee last name"
         },
         {
             name: "role",
             type: "list",
-            message: "What is this employees role? ",
+            message: "What is this employees role?",
             choices: selectRole()
         },
         {
@@ -257,17 +257,17 @@ const updateEmployee = () => {
                     }
                     return lastName;
                 },
-                message: "What is the Employee's last name? ",
+                message: "What is the Employee's last name?",
             },
             {
                 name: "role",
                 type: "rawlist",
-                message: "What is the Employees new title? ",
+                message: "What is the Employees new title?",
                 choices: selectRole()
             },
         ]).then(function(val) {
             const roleId = selectRole().indexOf(val.role) + 1;
-            db.query("UPDATE roles SET ?", {
+            db.query("UPDATE employees SET ?", {
                     last_name: val.lastName
 
                 }, {
