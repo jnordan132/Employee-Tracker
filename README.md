@@ -13,7 +13,7 @@ This terminal application is designed to give the ability to view and manage you
 # Installation
 The following necessary dependencies must be installed to run the application properly: Inquirer, Express, and MySQL2
 # Usage
-In order to use this app, first start by running "npm i", after installing dependencies you can run "node index.js", once the index.js file is ran you will be prompted with different choice of actions that can be taken.
+In order to use this app, first start by running "npm start", once this command is ran, you will be prompted with different choice of actions that can be taken.
 # License
 The MIT license. 
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
