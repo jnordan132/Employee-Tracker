@@ -1,6 +1,5 @@
 # Employee-Tracker
-[GitHub Repo](https://github.com/jnordan132/Employee-Tracker)\
-[Video Showing Use](https://drive.google.com/file/d/1a5aqqVuvGTxlTtxtiTKckoNWOio4ZUg-/view)
+[GitHub Repo](https://github.com/jnordan132/Employee-Tracker)
 # Description
 This terminal application is designed to give the ability to view and manage your employees by department, as well as role. You can also view tables per department/role to identify information such as job role, department of work, salary, and ID. This application has an SQL databse where all of this information gets stored and displayed from.
 # Table of Contents 
